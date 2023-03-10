@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'declaration.css' %}"> 
+{% endblock head %}
+
+{% block title %}SOS{% endblock title %}
+
+{% block content %}
+<div class="topa">   
+    <div class="container p-5">        
+        {% include 'partiel/user.html' %}
+            <div class="col-12 col-lg-6 p-5">
+                <h4>Deuxième conducteur</h4>
+                    <form method ="POST" enctype="multipart/form-data" hx-encoding="multipart/form-data">
+                        {% csrf_token %}  
+                        <p><label>Nom :</label>
+                        {% render_field form.nom placeholder="nom" %}</p> 
+                        <p><label>Prenom :</label>
+                        {% render_field form.prenom placeholder="prenom" %}</p> 
+                        <p><label>Email:</label>
+                        {% render_field form.nom placeholder="nom@life.com" %}</p> 
+                        <p><label>Permis:</label>
+                        {% render_field form.nbpermis placeholder="numéros permis" %}</p> 
+                        <p><label>Date de naissance</label>
+                        {% render_field form.age %}</p> 
+                        <p><label>Numéros de téléphone</label>
+                        {% render_field form.tel %}</p><br>
+                        <p><label>Adresse</label>
+                        {% render_field form.adresse %}</p>
+                        <p><label>Ville</label>
+                        <input type="text" list="ville" placeholder="Ville"></p>
+                            <datalist id="ville">
+                                {% for ville in ville %}
+                                <option value="{{ville}}"></option>
+                                {% endfor %}
+                            </datalist>
+                        <p><label>Code Postal</label>
+                            {% render_field form.code_postal %}</p><br>
+                        <p><label for="">Marque</label>
+                        <select name="marque" hx-trigger="change" hx-get="{% url 'sos' %}" hx-target="#modele">
+                            <option value="marque">--marque--</option> 
+                            {% for marque in marque_list %}
+                                <option value="{{ marque.pk }}">{{marque.nom}}</option>
+                            {% endfor %} 
+                            </select></p>        
+                        <div id="modele">{% include 'partiel/modele_de_voitur.html' %}</p></div>
+                        <p><label>Type de voiture</label>
+                            {% render_field form.typee %}</p>
+                        <p><label>Couleur de la voiture</label>
+                            {% render_field form.couleur %}</p>
+                        <p><label>Plaque de la voiture</label>
+                            {% render_field form.plaque %}</p>
+                        <p><label>Assurance</label>
+                            {% render_field form.assurance %}</p>
+                        <p><label>Numéros de contrat</label>
+                            {% render_field form.nbcontrat %}</p>
+                        </div>
+                    </div> 
+                <p class="line"></p>                   
+            <div class="row">
+                <div class="col-12 p-5">
+                <h4>Circonstance</h4>
+                <p class="line"></p> 
+                {% render_field form.circonstance %}<br>
+                <p><label>Nombre de circonstance cochée</label>
+                {% render_field form.nbCirconstance %}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 p-5">
+                <p class="line"></p> 
+                <h4>Dégâts</h4>
+                <p><label>Y-a til eu des blessés y compris vous-même?</label>
+                {% render_field form.blesse %}</p>
+                <p><label>Y-a til eu des dégâts externes?</label>
+                {% render_field form.degatautre %}</p> 
+                <p class="line"></p>            
+            </div>
+        </div> 
+        <div class="row">            
+            <div class="col-12 col-lg-6 p-5">
+                <h4>Voiture A</h4>
+                <p><label>Partie Endomager</label>
+                {% render_field form.degatsA %}</p>
+                <p><label>Précision de l'impact</label>
+                {% render_field form.degatouA %}</p>
+                <p><label>Dégâts apparents au véhicule A</label></p>
+                <p>{% render_field form.degat_vehicule_a %}</p>            
+            </div>
+            <div class="col-12 col-lg-6 p-5">
+                <h4>Voiture B</h4>
+                <p><label>Partie Endomager</label>
+                {% render_field form.degatsB %}</p>
+                <p><label>Précision de l'impact</label>
+                {% render_field form.degatouB %}</p>
+                <p><label>Dégâts apparents au véhicule B</label></p>
+                <p>{% render_field form.degat_vehicule_b %}</p>             
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-12 p-5">
+                <p class="line"></p> 
+                <h4>Date et lieux</h4>
+                <p><label>Date</label>
+                {% render_field form.date %}</p>           
+                <p><label>Témoins</label>
+                {% render_field form.temoin %}</p> 
+                <p><label>Photo</label>
+                {% render_field form.photo %}</p>             
+            </div> 
+        </div>
+        <p class="line"></p> 
+        <div class="row">
+            <h4>Observations</h4>
+            <div class="col-12 col-lg-6 p-5">
+                <h4>Voiture A</h4>        
+                <p><label>Dégâts apparents au véhicule A</label></p>
+                <p>{% render_field form.commentaireA %}</p>            
+            </div>
+            <div class="col-12 col-lg-6 p-5">
+                <h4>Voiture B</h4>             
+                <p><label>Dégâts apparents au véhicule B</label></p>
+                <p>{% render_field form.commentaireB %}</p>             
+            </div>
+        </div>
+        <div class="col-12 col-lg-10 p-5">
+            <p><label>Je certifie sur l'honneur que ces informations sont exactes:</label>
+            {% render_field form.signature %}</p>  
+        </div>
+        <button hx-swap="outerHTML"  hx-post="{% url 'declaration' %}" hx-target="#page" class="btn" type="submit" value="submit" name="validation">Valider</button>  
+            
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+
+{% block footer%} {% endblock footer %}

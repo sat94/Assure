@@ -1,0 +1,7 @@
+<p><label>Modele</label>
+<select name="modèle">
+    <option value="modele">--Modele--</option> 
+        {% for modele in modeles %}
+            <option value="{{ modele.pk }}">{{modele.nom}}</option>
+        {% endfor %} 
+    </select>

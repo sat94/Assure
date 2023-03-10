@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=google">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>    
+    <link rel="shortcut icon" href="{% static 'favicon.jpg' %}" type="image/png">   
+    <link rel="stylesheet" href= "{% static 'styles.css' %}">
+</head>
+<body>
+    <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" hx-target="#page" hx-push-url="true" hx-get="{% url 'index' %}"><img src="{% static 'logo.jpg' %}"class="navbar-brand ms-1 ms-md-4" height="65" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">         
+                <ul class="navbar-nav text-center ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'index' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'index' %}">Accueil</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'Profils' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'profils' %}">Profils</a></li> 
+                    <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'declaration' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'declaration' %}">SOS Déclaration</a></li>
+                    <a class="nav-link dropdown-toggle {% if request.path == profils %} active {% endif %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Mon Espace</a>
+                    <ul class="dropdown-menu dropdown-menu-end" id="navbar" aria-labelledby="navbarDropdown">
+                        {% if user.is_admin %}
+                        <li><a class="dropdown-item" hx-target="#page" hx-push-url="true" href="/admin">Aministration</a></li> 
+                        {% endif %}                       
+                        <li><a class="dropdown-item" hx-target="#page" hx-push-url="true" hx-get="{% url 'logout' %}">Déconnexion</a></li>
+                        {% else %}                          
+                        <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'formule' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'formule' %}">Formule</a></li> 
+                        <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'sinistre' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'sinistre' %}">Déclaration Sinistre</a></li>
+                        <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'login' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'login' %}">Connexion</a></li>
+                        {% endif %} 
+                    </ul>            
+                </div>
+            </div>
+        </nav>  
+
+        <title>AssuerPlus - {% block title%}{% endblock %}</title>
+        {% block head %}{% endblock head %}
+        {% block content %}{% endblock content %}
+       
+        {% block footer %}
+            <footer>
+                <p> @ Ce site a été élaboré dans le context du block 2. Doorgachurn Serge</p>
+            </footer>
+        {% endblock footer %}
+    </body>
+    <script>    
+        document.body.addEventListener('htmx:configRequest', (event)=> {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>     
+</html>

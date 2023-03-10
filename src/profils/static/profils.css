@@ -1,0 +1,76 @@
+body{
+    background-color: #ffffff;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.entete{
+  background-color: #263662;
+}
+.top{
+    margin-top: 80px;   
+}
+.container{
+  border: 3px solid  #263662 ;
+  margin-bottom: -8px;
+}
+.row{
+--bs-gutter-x: 0rem;
+}
+h2{
+  color: #263662;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  font-size: 70px;
+  margin-bottom: 70px;
+}
+
+span{
+    color: rgb(27, 23, 57);
+    font-weight: bolder;
+}
+.tete{
+  display: block;
+  margin-top: 100PX;
+  margin-left: 42%;
+  margin-bottom: 50px;
+  width: 20%;
+  height: auto; 
+  border-radius: 50%;
+  border:1px solid black;
+}
+p{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 50px;
+}
+h1{
+  text-align: center;
+  color: aliceblue;
+  padding-bottom: 50px;
+}
+.line{
+  border: 2px solid #263662; 
+  margin-bottom: 32px ;
+  margin-top: 32px; 
+}
+.linee{
+  border: 2px solid #263662;  
+}
+.lineee{
+  margin-top: 5px;
+  border: 2px solid #263662;  
+}
+.voiture{ 
+  width: 200%;
+  border-bottom: 2px solid  #263662;  
+}
+.border{
+  border: 2px solid #263662;
+}
+.ajuste{
+  margin-top: -11px;
+}
+.bg{
+  border-left: 4px solid #263662;
+}

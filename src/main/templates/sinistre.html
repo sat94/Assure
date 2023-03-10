@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'formule.css' %}"> 
+{% endblock head %}
+
+{% block title %}Sinistre{% endblock title %}
+
+{% block content %}
+<div class="top">   
+    <div class="container p-0"> 
+        <div class="row bg-white">
+            <div class=" col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'peugot.jpg' %}" class="img-fluid" alt="peugot">
+            </div>
+            <div class="col-12 col-lg-6 p-0 m-0">
+                <div class="d-flex justify-content-center">
+                    <h3 class="my-3 pt-3" >AssurePlus garantie un service 24/24 et 7/7 !</h3>
+                </div>  
+                <p class="m-3">AssurePlus vous garantie un service, facile, intuitif et rapide !! En effet, en cas d'accident, nous sommes consciens que vous êtes peut être en état choc émmotionnel. Et que vous avez pas forcement, toute les conditions requise pour remplir un constat. AssurePlus, vous falicite les choses grace a son formulaire facile a remplis avec une prise en charge immédiat !</p>
+                <p class="m-3">Nous avons été Élu Service Client de l’Année</p>
+                </p>                
+            </div>         
+            <hr>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="d-flex justify-content-center">
+                    <h3 class="my-3 pt-3">Que faire en cas d'accident</h3>
+                </div>  
+                <p class="m-3">Vous devez évaluer les conditions de sécurité et vous assurer qu’il n’y a pas de danger supplémentaire (un incendie, des voitures en circulation, etc.). Dans la mesure du possible, faites attention à vous et essayez d’assurer la sécurité des victimes et des autres personnes présentes. Si le contexte est beaucoup trop dangereux, alertez les services d’urgence. En attendant les secours, vous pouvez établir un périmètre de sécurité autour du lieu de l’accident.</p>
+                <p class="m-3">Si une ou plusieurs personnes sont blessées, essayez d’être près d’elle pour les rassurer. Il est important de surveiller qu’il n’y ait pas d’altération de la conscience ou de la respiration. Dans ces cas-là, le pronostic vital est souvent en jeu.</p>
+                </p>                
+            </div> 
+            <div class="d-flex col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'securite_routiere.jpg' %}" class="img-fluid" alt="signature">
+            </div>
+            <hr>
+        <div class="row">
+            <div class="d-flex align-item-stretch flex-wrap  col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'appel.jpg' %}" class="img-fluid" alt="siganture">
+             </div>
+                <div class="col-12 col-lg-6">
+                    <div class="d-flex justify-content-center">
+                        <h3 class="my-3 pt-3"> Non responsable de l’accident</h3>
+                    </div>  
+                    <p class="m-3">Si vous avez un accident pour lequel vous n’êtes pas responsable, sachez qu’il n’y aura aucun impact sur votre bonus-malus d’assurance. En effet, votre responsabilité n’étant pas engagée, vous n’avez pas à subir une pénalité telle que l’augmentation de votre prime d’assurance auto.</p>
+                    <p class="m-3">En conclusion, en cas d’accident, il est important d’avoir les bons réflexes. Constat amiable à effectuer directement si possible, sinon alerter des secours et des autorités compétentes. La prise en charge des dégâts matériels et des dommages corporels dépend de deux choses : la responsabilité (totale ou partielle) ou l’absence de responsabilité dans l’accident, et les garanties souscrites lors de la signature du contrat d’assurance auto.</p>
+                </div>         
+                <hr>
+        <div class="row">
+            <div class="col-12 col-lg-6 p-0 m-0">
+                <div class="d-flex justify-content-center">
+                    <h3 class="my-3 pt-3">AssurePlus vous en fait Plus</h3>
+                </div>  
+                <p class="m-3">A chaque validation de votre constat, nous sommes immédiatement alerter de votre soucis! Une dépaneuse sera prise en charge par nos soins pour évacuation de votre véhicule et sera automatiquement déposer dans un de nos garages partenaires!</p>
+                <p class="m-3">Votre dossier est prise en charge immédiatement, et les réparations nécèssaire sont faites immédiatement: si les répations prennent plus de délais. Une location de voiture vous sera alors automatiquement délivré si vous avez pris la formule 3.</p>         
+            </div> 
+            <div class="col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'zen.webp' %}" class="img-fluid" alt="cahier">
+            </div>
+        <hr>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascript %}{% endblock javascript %}

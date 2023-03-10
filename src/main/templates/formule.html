@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'formule.css' %}"> 
+{% endblock head %}
+
+{% block title %}Formule{% endblock title %}
+
+{% block content %}
+<div class="top">   
+    <div class="container p-0"> 
+        <div class="row bg-white">
+            <div class=" col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'voiture.jpg' %}" class="img-fluid" alt="peugot">
+            </div>
+            <div class="col-12 col-lg-6 p-0 m-0">
+                <div class="d-flex justify-content-center">
+                    <h3 class="my-3 pt-3" >Une assurance voiture est il obligatoire ?</h3>
+                </div>  
+                <p class="m-3">Oui, tout propriétaire de voiture doit au moins assurer le véhicule  avec une couverture responsabilité civile présente dès une formule tiers (Loi du 27 février 1958).</p>
+                <p class="m-3">Le propriétaire d'un véhicule à moteur (voiture, moto, ...) en circulation: en train de rouler sur la voie publique, ou en stationnement tout en étant ou en état de rouler en France doit l'assurer avec au minimum la garantie responsabilité civile. L'assurance responsabilité civile, appelée parfois assurance au tiers, sert à indemniser les victimes des dommages causés par le véhicule. Le non-respect de l'obligation d'assurance est puni pénalement. Cette obligation vous concerne quelle que soit votre nationalité et quelle que soit la durée de votre séjour en France.</p>
+                </p>                
+            </div>         
+            <hr>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="d-flex justify-content-center">
+                    <h3 class="my-3 pt-3">Les garanties incontournables !</h3>
+                </div>  
+                <p class="m-3">La garantie responsabilité civile couvre les dommages causés à un tiers, par imprudence ou négligence, qu'ils soient matériels ou corporels. Obligatoire pour prendre la route, elle est comprise dans toutes nos formules </p>
+                <p class="m-3">Si vous êtes impliqué dans un accident de la circulation et que votre responsabilité est engagée,  cette garantie assure votre défense en cas de poursuites pénales, selon les clauses prévues au contrat. Elle est incluse dans toutes nos formules.</p>
+                </p>                
+            </div> 
+            <div class="d-flex col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'signature.jpg' %}" class="img-fluid" alt="signature">
+            </div>
+            <hr>
+        <div class="row">
+            <div class="d-flex align-item-stretch flex-wrap  col-12 col-lg-6 p-0 m-0">    
+                    <img src="{% static 'signature2.webp' %}" class="img-fluid" alt="siganture">
+             </div>
+                <div class="col-12 col-lg-6">
+                    <div class="d-flex justify-content-center">
+                        <h3 class="my-3 pt-3">Formule TIERS</h3>
+                    </div>  
+                    <p class="m-3">La garantie responsabilité civile, appelée souvent assurance au tiers, est la garantie minimale que vous devez souscrire pour assurer votre véhicule. Cette garantie couvre les dommages que le véhicule peut occasionner : blessure d'un piéton ou d'un passager, dégât causé à un autre véhicule ou à un bâtiment par exemple.</p>
+                    <p class="m-3">Sont considérés comme tiers, une personne autre que l'assuré, son conjoint, l'ascendant et le descendant ainsi que leur conjoint et les collatéraux ». Bien que simple, cette définition des tiers peut être à l'origine d'une certaine confusion lorsque des problèmes surviennent.</p>
+                </div>         
+                <hr>
+        <div class="row">
+            <div class="col-12 col-lg-6 p-0 m-0">
+                <div class="d-flex justify-content-center">
+                        <h3 class="my-3 pt-3">Formule tout risque!</h3>
+                </div>  
+                  <p class="m-5">L’assurance auto Tous risques comprend : responsabilité civile, protection juridique suite à accident, garantie du conducteur, assistance au véhicule et aux personnes transportées, la garantie bris de glace ainsi que la garantie vol et tentative de vol, incendie attentat tempête, dommages accidents vandalisme et évènements naturels.</p>
+                    </p>                
+            </div> 
+            <div class="col-12 col-lg-6 p-0 m-0">    
+                <img src="{% static 'cahier.jpg' %}" class="img-fluid" alt="cahier">
+            </div>
+            <hr>
+        </div>
+        
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+                  
+
+{% block javascript %}{% endblock javascript %}

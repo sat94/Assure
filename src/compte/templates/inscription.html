@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'connexion.css' %}"> 
+{% endblock head %}
+
+{% block title %}Inscription{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-6">
+        <div class="bloc2">
+            <h4 class="center">Inscription</h4>  
+            <form method ="POST" enctype="multipart/form-data" hx-encoding="multipart/form-data">
+                <div class="form-group align form"> 
+                {% csrf_token %}  
+                <label>Votre email :</label>
+                {% render_field form.email placeholder="Votre@mail.com" hx-post="/check_email/" hx-trigger="keyup" hx-target="#email-error" %} 
+                <div id="email-error"></div><Br>
+                <label>Nom</label>
+                {% render_field form.nom placeholder="Nom" %}<Br>
+
+                <label>Prenom</label>
+                {% render_field form.prenom placeholder="Prénom" %}<Br>
+
+                <label>Votre mots de passe :</label>
+                {% render_field form.password1 hx-post="/check_password/" hx-trigger="keyup" hx-target="#password-error" %}<Br> 
+
+                <label>Retapez votre mot de passe :</label>
+                {% render_field form.password2 hx-post="/check_password/" hx-trigger="keyup" hx-target="#password-error" %}
+                <div id="password-error"></div><Br>
+
+                <label>Numéros de permis</label>
+                {% render_field form.nbpermis placeholder="Numéros" %}<br>
+
+                <label>Votre Age</label>
+                {% render_field form.age placeholder="Age" %}<br>
+
+                <label>Permis Jeune</label>
+                {% render_field form.jeune %}<br>
+
+                <label>Sexe</label>
+                {% render_field form.sexe %}<br> 
+
+                <label>Votre téléphone</label>
+                {% render_field form.numberPhone placeholder="Tel." %}<Br> 
+
+                <label>Votre Adresse</label>
+                {% render_field form.adresse placeholder="Votre adresse" %}<Br>               
+                             
+                    
+                <label>Ville</label>
+                <input type="text" list="ville" placeholder="Ville">
+                    <datalist id="ville">
+                        {% for ville in ville %}
+                        <option value="{{ville}}"></option>
+                        {% endfor %}
+                    </datalist>
+                <Br>
+
+                <label>Code Postal</label>
+                {% render_field form.postal placeholder="Code postal" %}<br>
+                        
+                        
+                <label>Votre photo</label><br>
+                {% render_field form.photo%}<BR>
+
+                <label>Contrat</label>
+                {% render_field form.Contrat %}<br>
+                <p>-------------------------------------------------------------------------------------</p>
+
+                <label for="">Marque</label>
+                <select name="marque" hx-trigger="change" hx-get="{% url 'voiture' %}" hx-target="#modele">
+                    <option value="marque">--select--</option> 
+                    {% for marque in marque_list %}
+                        <option value="{{ marque.pk }}">{{marque.nom}}</option>
+                    {% endfor %} 
+                </select><br>        
+
+               <div id="modele">
+                 {% include 'partiel/modele_de_voiture.html' %}
+               </div><br>
+
+                <label>Plaque</label>
+                {% render_field form.plaque placeholder="Plaque" %}<Br>
+                    
+                <label>Année de la voiture</label>
+                {% render_field form.annee placeholder="Année" %}<Br>
+
+                <label>Type de la voiture</label>
+                {% render_field form.typee %}<Br>
+
+                <label>Couleur de la voiture</label>
+                {% render_field form.couleur %}<Br>
+
+                <label>Chevaux de la voiture</label>
+                {% render_field form.chevaux placeholder="Chevaux" %}<Br>
+                
+                <label>La photo de votre voiture</label><br>
+                    {% render_field form.photo_voiture %}<BR>
+                </div>  
+               
+
+                <p><button hx-swap="outerHTML"  hx-post="{% url 'inscription' %}" hx-target="#page" class="btn btnr bg-dark" type="submit" value="submit" name="validation">Valider</button>  
+                    <a hx-swap="outerHTML" hx-get="{% url 'login' %}" hx-target="#page" class="btn btnr btn-dark">Retour</a></p>  
+        </div>  
+    <div class="col-6 block3"></div>     
+</div> 
+{% endblock content %}
+{% block footer%} {% endblock footer %}
+
+{% block javascript %}{% endblock javascript %}

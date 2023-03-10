@@ -1,0 +1,33 @@
+body{
+    color: white;    
+    background-image: url(page.jpg) ; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;    
+}
+.top{
+    margin-top: 260px; 
+    margin-left: 120px;
+}
+.top1{
+    margin-top: 310px; 
+    margin-left: 120px;
+}
+h1{
+    font: 1em sans-serif;
+    color: #361a1a;
+    font-size: 7rem;
+    font-weight: 200;    
+}
+.rouge{
+    color: white;
+    font-style: italic;
+}
+p{
+    margin-left: 40px;
+    color: rgb(251, 249, 249);
+}
+#trait_dessus{
+    border-top: 13px solid #ce1919;
+    width : 560px;
+}

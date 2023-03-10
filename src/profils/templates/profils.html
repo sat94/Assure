@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'profils.css' %}"> 
+{% endblock head %}
+
+{% block title %}Profils{% endblock title %}
+
+{% block content %}
+<div class="top">   
+    <div class="entete">
+        <p><img src={{user.photo.url}} class="img-fluid tete"></p>
+        <h1>Profil</h1>
+    </div>
+    <div class=" row bg-white p-5 mt-0">           
+        <h2>Assure Plus</h2> 
+        <p class="linee mb-2"></p>
+                            
+        <div class="col-12 col-lg-6 p-2 bg">
+            <p><span>Numéros Contrat:</span> {{user.Nbcontrat}}</p> 
+            <p><span>Votre forfait:</span> {{user.Contrat}}</P>   
+            <p><span>Permission:</span> {{user.permission}}</P>
+            <p class="line"></p>
+            <p><span>Nom :</span> {{user.nom}}</P>
+            <p><span>Prénom:</span> {{user.prenom}} </P>
+            <p><span>Email :</span> {{user.email}}</p>
+            <P><span>Permis:</span> {{user.nbpermis}}</P>
+                {% if user.jeune %}
+            <p><span>Jeune conditeur</p>
+                {% endif %}
+            <p class="line"></p> 
+            <p><span>Date de naissance:</span> {{user.age}}</p>
+            <p><span>Numéros Téléphone:</span> {{user.numberPhone}}</p>
+            <p><span>Sexe : </span>{{user.sexe}}</p><br>
+            <p class="line"></p>      
+            <p><span class="titre">Adresse:</span> {{user.adresse}}</P>
+            <p><span class="titre">Ville:</span> {{user.ville}}</P>
+            <p><span class="titre">Code Postal:</span> {{user.postal}}</P>
+            <br> 
+            </div>
+            <div class="col-12 col-lg-6 ajuste d-flex"> 
+                <div class="container">
+                    <div class="d-flex align-item-stretch flex-wrap p-0 m-0">
+                        <img src={{user.photo_voiture.url}} class="img-fluid voiture">
+                    </div>    
+                    <div class="p-5 m-0"> 
+                    <p><span> Voiture:</span> {{user.marque}}</p>
+                    <p><span> Date de circulation:</span> {{user.annee}}</p>
+                    <p><span> Marque:</span> {{user.modeles}}</p>
+                    <p><span> Nombre de chevaux:</span> {{user.chevaux}}</p>
+                    <p><span> Type de voiture :</span> {{user.typee}}</p>
+                    <p><span> Couleur de la voiture :</span> {{user.couleur}}</p>
+                    <p><span> Plaque de la voiture:</span> {{user.plaque}}</p>
+                    </div>  
+                </div>                 
+            </div>
+            <p class="lineee"></p> 
+        </div>
+    </div>
+</div>        
+{% endblock %}
