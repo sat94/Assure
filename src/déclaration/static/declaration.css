@@ -92,5 +92,14 @@ h1{
 #id_circonstance{
   column-count: 2;
 }
-
-
+.btn{
+  margin-top: 50px;
+  background-color: rgb(58, 58, 64);    
+  color: white;   
+  margin-bottom: 60px;    
+}    
+.btn:hover{
+  border: 1px solid ;
+  color: #1f8ea5;
+  background-color: black;
+}

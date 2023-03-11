@@ -8,7 +8,38 @@
 {% block title %}Garage{% endblock title %}
 
 {% block content %}
+<div class="topa">   
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-12 col-lg-6 p-5">
+                <h2>Le garage le plus proche </h2>
+                <br>
+                <br>
+                <h5>{{ garages.garage }}</h5> 
+                <br>       
+                <p>Adresse : {{ garages.adresse }}</p>
+                <p>Tel.: {{ garages.numberPhone }}</p>
+            </div>
+            <div class="col-12 col-lg-6 p-5">
+                <img src="{% static 'reseau.png' %}" class="img-fluid" alt="cahier">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 p-5">
+                <img src="{% static 'depaneuse.jpg' %}" class="img-fluid" alt="cahier">
+            </div>
+            <div class="col-12 col-lg-6 p-5">
+                <br>
+                <h2>Un Remorqueur arrive: </h2>
+                <br>
+                <p>Nom du conducteur : {{ garages.nom  }} </p>   
+                <p>Prenom : {{ garages.prenom }} </p>
+                <p>Plaque du remorquer : {{ garages.plaque }} </p> 
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 
-{% block footer%} {% endblock footer %}
+

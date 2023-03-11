@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.core.validators import RegexValidator
-from django.utils.text import slugify
 from django_resized import ResizedImageField
 
 
@@ -75,12 +74,11 @@ class MyUser(AbstractBaseUser):
     nbpermis = models.CharField(max_length=20,null=True, blank=True)
     age = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     sexe = models.CharField(choices=sexe,max_length=20)
-    slug = models.SlugField(max_length=20)
     photo = ResizedImageField(size=[250, 350], quality=85, upload_to='photo', null=True, blank=True)
     adresse = models.CharField(max_length=200)
     phone = RegexValidator(regex = r"^\+?1?\d{8,15}$")
     numberPhone = models.CharField(validators = [phone], max_length = 10)   
-    ville = models.OneToOneField("compte.ville", on_delete=models.SET_NULL, null=True, blank=True)
+    ville = models.CharField( max_length=30,null=True, blank=True)  
     postal = models.IntegerField(null=True, blank=True)   
     Nbcontrat = models.IntegerField(validators = [phone],null=True, blank=True)
     Contrat = models.ForeignKey("compte.Formule", on_delete=models.SET_NULL, null=True, blank=True)
@@ -103,12 +101,11 @@ class MyUser(AbstractBaseUser):
     objects = MyUserManager()
     
     def __str__(self):       
-        return self.email      
+        return self.nom + " "+ self.prenom +" " + self.email    
      
  
     def save(self, *args, **kwargs):
-        self.Nbcontrat = id(MyUser)
-        self.slug = slugify(self.nom)            
+        self.Nbcontrat = id(MyUser)               
         super().save(*args, **kwargs)    
     
 
@@ -120,7 +117,6 @@ class MyUser(AbstractBaseUser):
 
 class Formule(models.Model):
     nom = models.CharField(max_length=50)
-    description = models.CharField(max_length=1500)
 
     def __str__(self):
         return self.nom   
@@ -138,34 +134,17 @@ class Modele(models.Model):
     def __str__(self):
         return self.nom   
 
-class Garage(models.Model):
-    slug = models.SlugField(max_length=20)
-    nom = models.CharField(max_length=20)
+class Garage(models.Model): 
+    garage = models.CharField(max_length=20)
     phone = RegexValidator(regex = r"^\+?1?\d{8,15}$")
     numberPhone = models.CharField(validators = [phone], max_length = 10) 
-    adresse = models.CharField(max_length=200)    
-    lieu = models.OneToOneField("compte.Ville", on_delete=models.SET_NULL, null=True, blank=True)
-    remorque =  models.OneToOneField("compte.Remorque", on_delete=models.SET_NULL, null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.nom)            
-        super().save(*args, **kwargs) 
-
-    def __str__(self):
-        return self.slug
-
-class Remorque(models.Model):
+    adresse = models.CharField(max_length=200) 
     nom = models.CharField(max_length=20)      
     prenom = models.CharField(max_length=20)
     plaque = models.CharField(max_length=20)
-   
 
     def __str__(self):
-        return self.nom
-    
-    class Meta:
-        ordering = ['nom']
-   
+        return self.garage
 
 class Accident(models.Model):
     description = models.CharField(max_length=90) 
@@ -216,75 +195,45 @@ ou = [
 ]
 
 class Constat(models.Model):
-    blesse = models.BooleanField(default=False)
     personne = models.OneToOneField(MyUser, on_delete=models.SET_NULL, null=True, blank=True)
-    nom = models.CharField(max_length=50 , null=True, blank=True)
-    prenom = models.CharField(max_length=50 , null=True, blank=True)
+    blesse = models.BooleanField(default=False)   
+    nom = models.CharField(max_length=50,null=True, blank=True) 
+    prenom = models.CharField(max_length=20, null=True, blank=True) 
     age =  models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True) 
-    mail = models.EmailField(null=True, blank=True) 
+    mail = models.EmailField(max_length=20, null=True, blank=True) 
     adresse = models.CharField(max_length=50 , null=True, blank=True)
     code_postal = models.IntegerField(null=True, blank=True)
     phone = RegexValidator(regex = r"^\+?1?\d{8,15}$")    
     tel = models.CharField(validators = [phone], max_length = 10, null=True, blank=True)
     voiture = models.ForeignKey("compte.Marque", on_delete=models.SET_NULL, null=True, blank=True)
-    modeles = models.ForeignKey("compte.Modele", on_delete=models.SET_NULL, max_length=20, null=True, blank=True)
-    typee = models.CharField(choices=typee, max_length=20, null=True, blank=True)
-    couleur = models.CharField(choices=couleur, max_length=20, null=True, blank=True)
+    modeles = models.ForeignKey("compte.Modele", on_delete=models.SET_NULL, null=True, blank=True)
+    typee = models.CharField(max_length=50 ,choices=typee, null=True, blank=True)
+    couleur = models.CharField(max_length=50 ,choices=couleur, null=True, blank=True)
     plaque = models.CharField(max_length=20, null=True, blank=True)
     nbpermis = models.CharField(max_length=20, null=True, blank=True)
     nbcontrat = models.CharField(max_length=20, null=True, blank=True)    
-    assurance = models.CharField(choices=assurance, max_length=35, null=True, blank=True)
+    assurance = models.CharField(choices=assurance, max_length=50, null=True, blank=True)
     circonstance = models.ManyToManyField(Accident, max_length=20)
-    nbCirconstance = models.IntegerField(null=True, blank=True)
-    degatsA = models.CharField(choices=dégats, max_length=20, null=True, blank=True)
-    degatsB = models.CharField(choices=dégats, max_length=20, null=True, blank=True)
-    degatouA = models.CharField(choices=ou,max_length=20, null=True, blank=True)
-    degatouB = models.CharField(choices=ou,max_length=20, null=True, blank=True)
-    degatautre = models.BooleanField(default=False, null=True, blank=True)  
-    lieu = models.OneToOneField("compte.Ville", on_delete=models.SET_NULL, null=True, blank=True)
+    nbCirconstance = models.CharField(max_length=2,null=True, blank=True)
+    degatsA = models.CharField(max_length=50 ,choices=dégats, null=True, blank=True)
+    degatsB = models.CharField(max_length=50 ,choices=dégats,null=True, blank=True)
+    degatouA = models.CharField(max_length=50 ,choices=ou,null=True, blank=True)
+    degatouB = models.CharField(max_length=50 ,choices=ou,null=True, blank=True)
+    degatautre = models.BooleanField(default=False)  
+    lieu = models.CharField(max_length=20, null=True, blank=True)
+    adresse_accident = models.CharField(max_length=50,null=True, blank=True)
     degat_vehicule_a=models.CharField(max_length=50,null=True, blank=True)
     degat_vehicule_b=models.CharField(max_length=50,null=True, blank=True)
     dossier_en_cour:models.BooleanField(default=True)
     commentaireA= models.CharField(max_length=200,null=True, blank=True)
     commentaireB = models.CharField(max_length=200,null=True, blank=True)
-    date = models.DateField( auto_now=False, auto_now_add=False, null=True, blank=True)
+    date = models.DateField( auto_now=False, auto_now_add=False, null=True, blank=True) 
     photo = ResizedImageField(size=[250, 350], quality=85, upload_to='photo', null=True, blank=True)  
     temoin = models.CharField(max_length=50,null=True, blank=True)
-    signature = models.BooleanField(default=False)
+    signature = models.BooleanField(default=False) 
     
   
     
- 
-
-class Region(models.Model):
-    nom = models.CharField(max_length=20)    
-    def __str__(self):
-        return self.nom
-    class Meta:
-       ordering = ['nom']
-
-class Departement(models.Model): 
-    region = models.ForeignKey(Region, on_delete=models.SET_NULL,null=True, blank=True)
-    nom = models.CharField(max_length=20) 
-    code = models.CharField(max_length=4)
-    
-    def __str__(self):
-        return self.nom
-    class Meta:
-        ordering = ['nom']
-
-class Ville(models.Model):    
-    code_commune = models.CharField(max_length=5, unique=True)
-    nom = models.CharField(max_length=20)
-    departement = models.ForeignKey(Departement, on_delete=models.SET_NULL, null=True, blank=True)
-    code_postal = models.CharField(max_length=5)
-
-      
-    def __str__(self):
-        return self.nom
-    
-    class Meta:
-        ordering = ['nom']
 
 
  

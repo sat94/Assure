@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'index' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'index' %}">Accueil</a></li>
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'Profils' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'profils' %}">Profils</a></li> 
-                    <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'declaration' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'declaration' %}">SOS Déclaration</a></li>
+                    <li class="nav-item"><a class="nav-link me-0 me-lg-5 {% if navbar == 'declaration' %} active {% endif %}" hx-target="#page" hx-push-url="true" hx-get="{% url 'declaration'  %}">SOS Déclaration</a></li>
                     <a class="nav-link dropdown-toggle {% if request.path == profils %} active {% endif %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Mon Espace</a>
                     <ul class="dropdown-menu dropdown-menu-end" id="navbar" aria-labelledby="navbarDropdown">
                         {% if user.is_admin %}
@@ -52,9 +52,5 @@
             </footer>
         {% endblock footer %}
     </body>
-    <script>    
-        document.body.addEventListener('htmx:configRequest', (event)=> {
-            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-        })
-    </script>     
+     
 </html>

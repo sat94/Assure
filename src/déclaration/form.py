@@ -1,7 +1,6 @@
 from compte.models import Constat
-from compte.models import Constat
 from django import forms
-import os
+
 
 
 
@@ -12,8 +11,8 @@ class constatform(forms.ModelForm):
     class Meta:
         model=Constat
         fields = [
-            "blesse",
             "personne",
+            "blesse",         
             "nom",
             "prenom",
             "age",
@@ -44,10 +43,17 @@ class constatform(forms.ModelForm):
             "date",
             "photo",
             "temoin",
-            "signature"
+            "signature",
+            "adresse_accident"
             ]
         widgets = {
-            "age": DateInput(),         
+            "age": DateInput(),  
+            "adresse_accident": forms.Textarea(
+                attrs={
+                    'rows': 2,
+                    'cols': 24,
+                }
+            ),         
             "adresse": forms.Textarea(
                 attrs={
                     'rows': 2,

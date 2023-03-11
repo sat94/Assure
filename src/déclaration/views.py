@@ -1,30 +1,29 @@
+import random
+from django.template import RequestContext
+from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import redirect, render
-from compte.models import Ville, Marque, Modele
+from compte.models import Marque, Modele, Garage
 from déclaration.form import constatform
 
-
-
+@csrf_protect
 def declaration(request):
+    csrfContext = RequestContext(request)
     context={}
     form = constatform() 
-    ville = Ville.objects.all() 
     marques = Marque.objects.all()
-    marque = Modele.objects.values('marque_id').distinct() 
-    ville = Ville.objects.all() 
+    marque = Modele.objects.values('marque_id').distinct()  
     if request.method == "POST":
         form = constatform(request.POST,request.FILES) 
-        if form.is_valid():                           
+        if form.is_valid():                                          
             form.save()
             return redirect("garage")
-        else:
-            print("c'est faux")
-            form = constatform()
+        else:                  
+            form = constatform()        
     context = {"form": form, 
                 "marque_lists": marque,
                 "marque_list" : marques,
-                "form" : form,   
-                "ville" : ville,                                      
-               }
+                "form" : form,                 
+            }
     return render(request, "declaration.html",context)
 
 def modelee(request):
@@ -37,4 +36,9 @@ def modelee(request):
     return render(request, 'partiel/modele_de_voitur.html', context)
 
 def garage(request):
-    return render(request, "garage.html")
+    u = random.randint(1,50)
+    garage = Garage.objects.all()
+    garage = Garage.objects.get(id=u) 
+    print(garage)  
+    context =  {"garages" : garage}
+    return render(request, "garage.html", context)

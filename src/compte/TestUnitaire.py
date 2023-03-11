@@ -1,26 +1,8 @@
-from compte.models import Marque, Modele, Departement, Region, Ville, Remorque, Garage
+from compte.models import Marque, Modele, Garage
 from pathlib import Path
 import random
 import json
 
-
-
-
-
-def inscription_ville():
-    villes = []  
-    commune = Ville.objects.all()
-       
-    for i in range(22181): 
-        add_ville = commune[i].nom + str(i) 
-        villes.append(add_ville)       
-   
-    json_data = {
-        "villes": villes
-    }
-
-    with open('city.json', 'w',) as f:
-        json.dump(json_data, f, indent=4, ensure_ascii=False, sort_keys=True)   
 
 
 prenoms = ["Axel","Adrien","Augustin","Amaury","Ayoub","Bastien","Arthur","Alban","Alexis","Antoine","Auguste","Benjamin",
@@ -70,24 +52,20 @@ def creation_de_garage():
        "de la Folie","artur Dubois","des jardins","du château","de la fontaine","du stade","de l'église","de la Mairie"
        ,"de la Gare","des écoles"]
     
-    files = Path.cwd() / "compte/remorqueurs.json"
-    with open(files, 'r', encoding='utf-8') as f:
-        datas = json.load(f)
-    
+
    
-    commune = Ville.objects.all()
+
     garages = []
     i=0
     
-    for row in datas:
-
-        add_ville = commune[i].code_commune        
+    for i in range(50):
         garage = {
         "Garage": "Garage " + random.choice(nom_de_garage),
         "adresse": str(random.randint(1, 100)) +  random.choice([" rue "," avenue "," boulevard "," chemin "," Chaussée "," allée "," place "," villa "," voie "," promenade "])+ random.choice(nom_des_rues),        
         "tel": "0" + str(random.randint(6, 9)) + str(random.randint(10, 99)) + str(random.randint(10, 99)) + str(random.randint(10, 99)) + str(random.randint(10, 99)),
-        "remorque": row[str("nom")],
-        "lieux": add_ville,
+        "nom": random.choice(noms_de_famille),
+        "prenom": random.choice(prenoms),
+        "plaque": chr(random.randint(ord('A'), ord('Z')))+ chr(random.randint(ord('A'), ord('Z')))+ str(random.randint(100, 999)) + chr(random.randint(ord('A'), ord('Z'))) + chr(random.randint(ord('A'), ord('Z'))),         
         }    
         print(garage)
         garages.append(garage)
@@ -98,33 +76,6 @@ def creation_de_garage():
     }
     with open('garages.json', 'w', encoding='utf-8') as f:
         json.dump(json_data, f, indent=4, ensure_ascii=False, sort_keys=True)
-
-def remorqueur():    
-    remorqueurs = []
-
-    for i in range(35734):
-        remorqueur = {           
-        "nom": random.choice(noms_de_famille)+str(i),
-        "prenom": random.choice(prenoms),
-        "plaque": chr(random.randint(ord('A'), ord('Z')))+ chr(random.randint(ord('A'), ord('Z')))+ str(random.randint(100, 999)) + chr(random.randint(ord('A'), ord('Z'))) + chr(random.randint(ord('A'), ord('Z'))),      
-        }      
-        remorqueurs.append(remorqueur)
-
-    json_data = {
-        "remorqueurs": remorqueurs
-    }
-    with open('remorqueurs.json', 'w', encoding='utf-8') as f:
-        json.dump(json_data, f, indent=4,  ensure_ascii=False, sort_keys=True)
-
-def insert_remorqueur():
-    file = Path.cwd() / "compte/remorqueurs.json"
-    with open(file, 'r', encoding='utf-8') as f:
-        datas = json.load(f)
-    i=0    
-    for row in datas:        
-        remorqueur = Remorque(id=None,nom=row[str("nom")],prenom=row["prenom"],plaque=row["plaque"])
-        i=i+1
-        remorqueur.save()
 
 def voiture():
     file = Path.cwd() / "compte/voiture.json"
@@ -141,37 +92,7 @@ def voiture():
             except:
                 print(mod)
 
-def departement():
-    file = Path.cwd() / "compte/departement.json"
-    with open(file, 'r', encoding='utf-8') as f:
-        datas = json.load(f)
 
-    for row in datas:     
-        region = list(row.keys())[0]   
-        reg = Region( nom = region)
-        reg.save()         
-    
-        for i in row[region]:         
-            departement = i['name']         
-            code = i['code']         
-            dep = Departement(nom = departement, code = code, region =reg)
-            dep.save()
-
-def villa():
-    # datas = p.read_csv("communes.csv")
-    file = Path.cwd() / "compte/communes.json"
-    with open(file, 'r', encoding='utf-8') as f:    
-         datas = json.load(f)           
-
-    for row in datas:
-        try:
-            cod=str(row["Code_postal"])[0:2]
-            dep = Departement.objects.get(code=int(cod))    
-            ville = Ville(code_commune=row["Code_commune_INSEE"],nom=row["Nom_commune"], code_postal=row["Code_postal"], departement=dep) 
-            ville.save()      
-          
-        except:
-            print(f"{ville} du departement {dep} ne pas pu être inscrit {cod}") 
 
 def insert_garages():
     i=0
@@ -180,14 +101,11 @@ def insert_garages():
         datas = json.load(f)
 
     for row in datas:       
-        garages = Garage(id=None,slug=row[str("Garage")],nom=row["Garage"],numberPhone=row["tel"],adresse=row['adresse'],remorque=Remorque.objects.get(nom=row["remorque"]),lieu=Ville.objects.get(code_commune=row["lieux"]))
+        garages = Garage(id=None,slug=row[str("Garage")],nom=row["Garage"],numberPhone=row["tel"],adresse=row['adresse'],nom=row[str("nom")],prenom=row["prenom"],plaque=row["plaque"])
         print(garages)
         i=i+1
         garages.save()
 
-def action():
-    departement()
+def action():  
     voiture()
-    villa()
-    insert_remorqueur()
     insert_garages()
