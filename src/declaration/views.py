@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import redirect, render
 from compte.models import Marque, Modele, Garage
-from déclaration.form import constatform
+from declaration.form import constatform
 
 @csrf_protect
 def declaration(request):

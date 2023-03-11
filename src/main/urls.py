@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from .views import index, formule, sinistre
 from compte.views import *
-from déclaration.views import *
+from declaration.views import *
 from profils.views import profils
 from main import settings
 

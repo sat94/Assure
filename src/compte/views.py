@@ -119,8 +119,7 @@ def action():
 def login(request):
     return render(request, "login.html", {'navbar': 'login'})
 
-def inscription(request): 
-    action()
+def inscription(request):    
     context={}
     form=SignupForm   
     marques = Marque.objects.all()
