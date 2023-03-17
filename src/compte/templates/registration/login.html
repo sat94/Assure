@@ -13,18 +13,14 @@
     <form method ="POST">
        {% csrf_token %}
        <div class="text">
-        <label>Nom d'utilisateur :</label>
-        <p>{{ form.username }}</p>
-        <label>Mot de passe :</label>
-        <p>{{ form.password}}</p>
+            <label>Nom d'utilisateur :</label>
+            <p>{{ form.username }}</p>
+            <label>Mot de passe :</label>
+            <p>{{ form.password}}</p>
         </div>
         <button hx-target="#page" hx-push-url="true" hx-post="{% url 'login' %}" class="btn btnr" type="submit">Se connecter</button>
         <button hx-target="#page" hx-push-url="true" hx-get="{% url 'inscription' %}" class="btn btnr" type="submit">Crée un compte</button> 
-    </form>    
-    </div>
-    </div>
+    </form>   
 </div>
 {% endblock content %}
-{% block footer%} {% endblock footer %}
 
-{% block javascript %}{% endblock javascript %}

@@ -12,9 +12,7 @@ body{
   border: 3px solid  #263662 ;
   margin-bottom: -8px;
 }
-.row{
---bs-gutter-x: 0rem;
-}
+
 h2{
   color: #263662;
   text-align: center;
@@ -31,9 +29,9 @@ span{
 .tete{
   display: block;
   margin-top: 100PX;
-  margin-left: 42%;
+  margin-left: 10%;
   margin-bottom: 50px;
-  width: 20%;
+  width: 10%;
   height: auto; 
   border-radius: 50%;
   border:1px solid black;
@@ -42,7 +40,6 @@ p{
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  padding-right: 50px;
 }
 h1{
   text-align: center;
@@ -73,4 +70,61 @@ h1{
 }
 .bg{
   border-left: 4px solid #263662;
+}
+@media only screen and (max-width: 980px) {
+  .tete{
+  
+  margin-top: 100PX;
+  
+  margin-bottom: 50px;
+  width: 80%;
+  height: auto; 
+  border-radius: 50%;
+  border:1px solid black;
+}
+  h2{
+    color: #263662;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-size: 30px;
+    margin-bottom: 70px;
+  }
+  .lineee{
+    margin-top: 55px;
+    border: 1px solid #263662;  
+  }
+  
+  .border{
+    border: 0px solid #263662;
+  }
+  .line{
+    border: 0px solid #263662; 
+    margin-bottom: 0px ;
+    margin-top: 0px; 
+  }
+  .linee{
+    border: 0px solid #263662;  
+  }
+  .bg{
+    margin-left: 0px;
+    border-left: 0px solid #263662;
+  }
+  .p-5{
+    padding: 0rem!important;
+  }
+  .row {
+    --bs-gutter-x: none; 
+}
+  p{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px!important;
+ 
+  }
+.container{
+  border: 0px solid  #263662 ;
+  margin-top: -70px;
+}
 }

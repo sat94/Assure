@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
-from compte.models import *
 from django.contrib.auth import logout
 from compte.forms import *
 from django.contrib.auth import get_user_model
-from compte.models import Marque, Modele
+from compte.models import *
 from pathlib import Path
 import random
 import json

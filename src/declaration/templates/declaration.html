@@ -160,7 +160,8 @@
                     {% render_field form.photo %}</p><br>
                     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
                     <p><label>Je certifie sur l'honneur que ces informations sont exactes:</label>
-                {% render_field form.personne %}{% render_field form.signature %}</p>  
+                    {% render_field form.signature %}</p>  
+                    <p>{% render_field form.personne %}</p>
                 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}</div>
             <button hx-swap="outerHTML"  hx-post="{% url 'declaration' %}" hx-target="#page" class="btn" type="submit" value="submit" name="validation">Valider</button> 
         </form>

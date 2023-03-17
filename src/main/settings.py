@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-&bnu1v)r9l!qbvo-2_n(paap_vaguq30)zqzt+)!4a7y9n+e*l'
 DEBUG = True
-ALLOWED_HOSTS="http://doorgachurn.pythonanywhere.com/"
+ALLOWED_HOSTS=[]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -121,7 +121,5 @@ AUTH_USER_MODEL = "compte.MyUser"
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
-
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

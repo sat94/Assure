@@ -87,3 +87,52 @@ ul li{
 .label{
     padding-top: 5px;
 }
+@media only screen and (max-width: 980px) {
+  
+    .top{
+        margin-top: 40px;   
+    }    
+    .bloc2{
+        text-align: center;
+        width: 380px;
+        height: auto;
+        background: #21325fd3;  
+        border: 1px solid black;        
+        margin-left: 0px;
+    }
+    .bloc{
+        text-align: center;
+        margin-top: 90px;
+        width: 100%;
+        height:auto;       
+        background: #21325fd3;  
+        border: 1px solid black;        
+        margin-left: 0px;    
+    }
+    .form{
+        width: 100%;
+        height:auto; 
+        margin-top: 30px;
+        margin-left: -20px;
+        font-size: 18px;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+    .row{
+        --bs-gutter-x:0rem;
+        overflow: hidden;
+        width: 100%;
+    }
+    h4{
+        padding-top: 50px;
+        font-size: 30px;
+        margin-left: -40px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-style: italic;
+        color: #ffffff;
+        padding-bottom: 50px;
+    }
+}
